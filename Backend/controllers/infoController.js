@@ -1,48 +1,44 @@
 import transporter from "../config/mailer.js";
 
-// Function ko BAHAR define karo
-const sanitize = (str) => String(str).replace(/</g, "&lt;").replace(/>/g, "&gt;");
+export let HomeRoute = (req,res)=>{
+res.send("Backend Running")
+}
 
-export let HomeRoute = (req, res) => {
-  res.send("Backend Running");
-};
+import transporter from "../config/mailer.js";
 
-export let contactPost = async (req, res) => {
+export const contactPost = async (req, res) => {
   try {
-    console.log("BODY:", req.body);
-    let { name, email, message } = req.body;
+    const { name, email, message } = req.body;
 
-    // Validation
     if (!name || !email || !message) {
-      return res.status(400).json({ success: false, msg: "All fields are required" });
+      return res.status(400).json({ msg: "All fields required" });
     }
 
     await transporter.sendMail({
-      from: process.env.EMAIL_USER,
+      from: `"Portfolio" <${process.env.EMAIL_USER}>`,
       to: process.env.EMAIL_USER,
       replyTo: email,
       subject: "New Portfolio Contact",
       html: `
-        <div style="font-family: Arial, sans-serif;">
-          <h2>📩 New Portfolio Contact</h2>
-          <hr>
-          <p><strong>Name:</strong> ${sanitize(name)}</p>
-          <p><strong>Email:</strong> ${sanitize(email)}</p>
-          <p><strong>Message:</strong> ${sanitize(message)}</p>
-        </div>
+        <h2>New Message</h2>
+        <p><b>Name:</b> ${name}</p>
+        <p><b>Email:</b> ${email}</p>
+        <p><b>Message:</b> ${message}</p>
       `,
     });
 
-    res.status(200).json({
+    return res.status(200).json({
       success: true,
-      msg: "Email Sent Successfully",
+      msg: "Email sent successfully",
     });
 
   } catch (error) {
-    console.log("full error", error);
-    res.status(500).json({
+    console.log("EMAIL ERROR:", error);
+
+    return res.status(500).json({
       success: false,
-      msg: "Email Sending Failed",
+      msg: "Email failed",
+      error: error.message,
     });
   }
 };

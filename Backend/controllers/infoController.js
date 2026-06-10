@@ -1,5 +1,9 @@
 import transporter from "../config/mailer.js";
 
+export let HomeRoute = (req,res)=>{
+res.send("Backend Running")
+}
+
 export let contactPost = async (req, res) => {
   try {
     let { name, email, message } = req.body;

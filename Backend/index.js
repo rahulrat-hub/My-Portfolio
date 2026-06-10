@@ -12,4 +12,6 @@ app.use(express.json())
 app.use(express.urlencoded())
 app.use(myroute)
 
-app.listen(4000, ()=>console.log("running"))
+app.listen(PORT, ()=>{
+    console.log(`Server running on port ${PORT}`)
+})

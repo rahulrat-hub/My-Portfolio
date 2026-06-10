@@ -16,13 +16,13 @@ const [sent, setsent] = useState(false)
 
       console.log("Button Clicked")
  try{
-  let messageinfomation = await axios.post("http://localhost:4000/contact", {
+  let messageinfomation = await axios.post("https://my-portfolio-backend-x7oc.onrender.com/contact", {
       name, 
       email, 
       message,
     })
 
-    console.log(response.data)
+    console.log(messageinformation.data)
 
    alert("message sent")
      setSent(true);

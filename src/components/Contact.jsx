@@ -26,12 +26,13 @@ const [sent, setsent] = useState(false)
 
    alert("message sent")
      setsent(true);
-
+setTimeout(() => setsent(false), 3000);
     setname("");
     setemail("");
     setmessage("");
  }catch (error) {
     console.log(error);
+     alert("Failed to send message. Please try again.")
      console.log(error.response?.data);
   console.log(error.message);
   }

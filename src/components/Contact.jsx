@@ -16,7 +16,7 @@ const [sent, setsent] = useState(false)
 
       console.log("Button Clicked")
  try{
-  let messageinfomation = await axios.post("https://my-portfolio-backend-x7oc.onrender.com/contact", {
+  let messageinformation = await axios.post("https://my-portfolio-backend-x7oc.onrender.com/contact", {
       name, 
       email, 
       message,
@@ -25,7 +25,7 @@ const [sent, setsent] = useState(false)
     console.log(messageinformation.data)
 
    alert("message sent")
-     setSent(true);
+     setsent(true);
 
     setname("");
     setemail("");

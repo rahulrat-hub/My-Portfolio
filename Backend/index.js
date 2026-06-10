@@ -7,9 +7,12 @@ import myroute from './routes/myinfo.js'
 dotenv.config();
 
 const app = express()
-app.use(cors())
+app.use(cors({
+     origin: "https://my-portfolio-omega-roan-99.vercel.app",
+  credentials: true
+}))
 app.use(express.json())
-app.use(express.urlencoded())
+app.use(express.urlencoded({ extended : true}))
 app.use(myroute)
 
 const PORT = process.env.PORT || 4000

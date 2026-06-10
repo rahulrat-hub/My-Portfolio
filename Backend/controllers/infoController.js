@@ -6,6 +6,7 @@ res.send("Backend Running")
 
 export let contactPost = async (req, res) => {
   try {
+     console.log("BODY:", req.body);
     let { name, email, message } = req.body;
 
     await transporter.sendMail({
